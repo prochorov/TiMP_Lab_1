@@ -1,23 +1,36 @@
 #include <iostream>
-#include "tableCipher.h"
+#include "TableCipher.h"
 
 int main() {
-    std::string key;
+    int columns;
     std::cout << "Enter the number of columns: ";
-    std::cin >> key;
+    std::cin >> columns;
 
-    TableCipher cipher(key);
+    TableCipher cipher(columns);
 
+    int choice;
     std::string text;
-    std::cout << "Enter the text to encrypt: ";
-    std::cin.ignore();
-    std::getline(std::cin, text);
 
-    std::string encrypted = cipher.encrypt(text);
-    std::cout << "Encrypted text: " << encrypted << std::endl;
+    while (true) {
+        std::cout << "Choose an operation (1-Encrypt, 2-Decrypt, 0-Exit): ";
+        std::cin >> choice;
 
-    std::string decrypted = cipher.decrypt(encrypted);
-    std::cout << "Decrypted text: " << decrypted << std::endl;
+        if (choice == 0) {
+            break;
+        } else if (choice == 1) {
+            std::cout << "Enter the text: ";
+            std::cin.ignore();
+            std::getline(std::cin, text);
+            std::string encrypted = cipher.encrypt(text);
+            std::cout << "Encrypted text: " << encrypted << std::endl;
+        } else if (choice == 2) {
+            std::cout << "Enter the text: ";
+            std::cin.ignore();
+            std::getline(std::cin, text);
+            std::string decrypted = cipher.decrypt(text);
+            std::cout << "Decrypted text: " << decrypted << std::endl;
+        }
+    }
 
     return 0;
 }
